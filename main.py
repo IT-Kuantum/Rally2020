@@ -8,7 +8,7 @@ pg.init()
 pg.display.set_caption('Rally')
 screen = pg.display.set_mode(SIZE)
 
-FPS = 120
+FPS = 800
 clock = pg.time.Clock()
 
 
