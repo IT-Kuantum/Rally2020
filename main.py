@@ -1,3 +1,4 @@
+#"Ралли"
 import pygame as pg
 
 SIZE = WIDTH, HEIGHT = 800, 600
@@ -7,6 +8,13 @@ pg.init()
 pg.display.set_caption('Rally')
 screen = pg.display.set_mode(SIZE)
 
+
+class Car(pg.sprite.Sprite):
+    def __init__(self):
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.image.load('Image/car1.png')
+
+
 game = True
 while game:
     for e in pg.event.get():
@@ -15,4 +23,6 @@ while game:
 
     screen.fill(GRAY)
     pg.display.update()
+
+
 
