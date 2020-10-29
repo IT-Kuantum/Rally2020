@@ -8,6 +8,10 @@ pg.init()
 pg.display.set_caption('Rally')
 screen = pg.display.set_mode(SIZE)
 
+FPS = 120
+clock = pg.time.Clock()
+
+
 
 class Car(pg.sprite.Sprite):
     def __init__(self):
@@ -28,7 +32,7 @@ while game:
         if e.type == pg.QUIT:
             game = False
     
-    car1.y <= 1
+    car1.y -= 1
     if car1.y < -car1_h:
         car1.y = HEIGHT
 
