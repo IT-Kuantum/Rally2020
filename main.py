@@ -17,7 +17,9 @@ class Car(pg.sprite.Sprite):
 
 car1 = Car()
 car1_image = car1.image
-
+car1_w, car1_h = car1.image.get_width(), car1.image.get_height()
+print(car1_w, car1_h)
+car1.x, car1.y = (WIDTH - car1_w) // 2, (HEIGHT - car1_h) // 2
 
 
 game = True
@@ -27,6 +29,7 @@ while game:
             game = False
 
     screen.fill(GRAY)
+    screen.blit(car1_image, (car1.x, car1.y))
     pg.display.update()
 
 
