@@ -15,6 +15,11 @@ class Car(pg.sprite.Sprite):
         self.image = pg.image.load('Image/car1.png')
 
 
+car1 = Car()
+car1_image = car1.image
+
+
+
 game = True
 while game:
     for e in pg.event.get():
