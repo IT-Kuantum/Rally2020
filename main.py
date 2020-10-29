@@ -27,10 +27,15 @@ while game:
     for e in pg.event.get():
         if e.type == pg.QUIT:
             game = False
+    
+    car1.y <= 1
+    if car1.y < -car1_h:
+        car1.y = HEIGHT
 
     screen.fill(GRAY)
     screen.blit(car1_image, (car1.x, car1.y))
     pg.display.update()
-
+    clock.tick(FPS)
+    pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
 
 
