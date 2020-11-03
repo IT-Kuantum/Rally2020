@@ -3,6 +3,7 @@ import pygame as pg
 
 SIZE = WIDTH, HEIGHT = 800, 600
 GRAY = (128, 128, 128)
+GREEN = (0, 128, 0)
 
 pg.init()
 pg.display.set_caption('Rally')
@@ -26,6 +27,12 @@ print(car1_w, car1_h)
 car1.x, car1.y = (WIDTH - car1_w) // 2, (HEIGHT - car1_h) // 2
 
 
+def bg():
+    pg.draw.line(screen, GREEN, (20,0), (20, 600), 40)
+    pg.draw.line(screen, GREEN, (780, 0), (780, 600), 40)
+
+
+
 game = True
 while game:
     for e in pg.event.get():
@@ -38,6 +45,7 @@ while game:
 
     screen.fill(GRAY)
     screen.blit(car1_image, (car1.x, car1.y))
+    bg()
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
