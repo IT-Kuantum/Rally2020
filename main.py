@@ -13,25 +13,39 @@ pg.init()
 pg.display.set_caption('Rally')
 screen = pg.display.set_mode(SIZE)
 
-FPS = 130
+FPS = 5000
 clock = pg.time.Clock()
 
 bg_image = pg.image.load('Image/road.jpg')
 bg_image_rect = bg_image.get_rect(topleft = (0, 0))
 bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
+car1_image = pg.image.load('Image/car1.png')
 
-
-class Car(pg.sprite.Sprite):
+class Player(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load('Image/car1.png')
+        self.image = pg.image.load('Image/car4.png')
+
+class Car(pg.sprite.Sprite):
+    def __init__(self, x, y, w, h , s, img):
+        pg.sprite.Sprite.__init__(self)
+        self.image = img
+        self.image = pg.transform.flip(self.image, False, True)
+        self.x, self.y = x, y
+        self.w, self.h = w,h
+        self.speed = s
+        self.rect = self.image.get_rect(center=(self.x, self.y))
 
 
-car1 = Car()
-car1_image = car1.image
-car1_w, car1_h = car1.image.get_width(), car1.image.get_height()
-print(car1_w, car1_h)
-car1.x, car1.y = (WIDTH - car1_w) // 2, (HEIGHT - car1_h) // 2
+
+play = Player()
+play_image = play.image
+play_w, play_h = play.image.get_width(), play.image.get_height()
+play.x, play.y = (WIDTH - play_w) // 2, (HEIGHT - play_h) // 2
+
+
+car1 = Car(WIDTH // 2 + 80, HEIGHT // 2, 
+            car1_image.get_width(), car1_image.get_height(), 1, car1_image)
 
 
 def bg():
@@ -52,10 +66,9 @@ while game:
         if e.type == pg.QUIT:
             game = False
     
-    car1.y -= 1
-    if car1.y < -car1_h:
-        car1.y = HEIGHT
-
+    car1.y += 1
+    if car1.y > HEIGHT + car1.h:
+        car1.y = -car1.h
     bg_image_rect.y += 1
     if bg_image_rect.y > HEIGHT:
         bg_image_rect.y = 0
@@ -69,7 +82,8 @@ while game:
     for i in range (2):
         screen.blit(bg_image, bg_image_rect if i == 0 else bg_image_2_rect)
     #screen.blit(bg_image, bg_image_2_rect)
-    screen.blit(car1_image, (car1.x, car1.y))
+    screen.blit(car1_image, car1.rect)
+    screen.blit(play.image, (play.x, play.y))
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
