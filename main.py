@@ -65,10 +65,8 @@ while game:
     for e in pg.event.get():
         if e.type == pg.QUIT:
             game = False
+
     
-    car1.y += 1
-    if car1.y > HEIGHT + car1.h:
-        car1.y = -car1.h
     bg_image_rect.y += 1
     if bg_image_rect.y > HEIGHT:
         bg_image_rect.y = 0
