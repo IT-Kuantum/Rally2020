@@ -16,6 +16,8 @@ screen = pg.display.set_mode(SIZE)
 FPS = 120
 clock = pg.time.Clock()
 
+bd_image = pg.image.load('Image/road.jpg')
+
 
 
 class Car(pg.sprite.Sprite):
