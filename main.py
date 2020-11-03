@@ -16,8 +16,9 @@ screen = pg.display.set_mode(SIZE)
 FPS = 120
 clock = pg.time.Clock()
 
-bd_image = pg.image.load('Image/road.jpg')
-
+bg_image = pg.image.load('Image/road.jpg')
+bg_image_rect = bg_image.get_rect(topleft = (0, 0))
+bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
 
 
 class Car(pg.sprite.Sprite):
@@ -55,9 +56,19 @@ while game:
     if car1.y < -car1_h:
         car1.y = HEIGHT
 
+    bg_image_rect.y += 1
+    if bg_image_rect.y > HEIGHT:
+        bg_image_rect.y = 0
+    
+    bg_image_2_rect.y += 1
+    if bg_image_2_rect.y > 0:
+        bg_image_2_rect.y = -HEIGHT
+
     screen.fill(GRAY)
     screen.blit(car1_image, (car1.x, car1.y))
-    bg()
+    #bg()
+    screen.blit(bg_image, bg_image_rect)
+    screen.blit(bg_image, bg_image_2_rect)
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
