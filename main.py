@@ -65,10 +65,11 @@ while game:
         bg_image_2_rect.y = -HEIGHT
 
     screen.fill(GRAY)
-    screen.blit(car1_image, (car1.x, car1.y))
     #bg()
-    screen.blit(bg_image, bg_image_rect)
-    screen.blit(bg_image, bg_image_2_rect)
+    for i in range (2):
+        screen.blit(bg_image, bg_image_rect if i == 0 else bg_image_2_rect)
+    #screen.blit(bg_image, bg_image_2_rect)
+    screen.blit(car1_image, (car1.x, car1.y))
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
