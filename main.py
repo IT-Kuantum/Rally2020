@@ -1,9 +1,13 @@
 #"Ралли"
 import pygame as pg
+import os
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 SIZE = WIDTH, HEIGHT = 800, 600
 GRAY = (128, 128, 128)
 GREEN = (0, 128, 0)
+WHITE = (200, 200, 200)
 
 pg.init()
 pg.display.set_caption('Rally')
@@ -30,6 +34,12 @@ car1.x, car1.y = (WIDTH - car1_w) // 2, (HEIGHT - car1_h) // 2
 def bg():
     pg.draw.line(screen, GREEN, (20,0), (20, 600), 40)
     pg.draw.line(screen, GREEN, (780, 0), (780, 600), 40)
+    for xx in range(10):
+        for yy in range(10):
+            pg.draw.line(
+                screen, WHITE,
+                (40 + xx * 80, 0 if xx == 0 or xx == 9 else 10 + yy * 60),
+                (40 + xx * 80, 600 if xx == 0 or xx == 9 else 50 + yy * 60), 5)
 
 
 
