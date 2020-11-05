@@ -63,8 +63,8 @@ class Road(pg.sprite.Sprite):
                 self.image, WHITE,
                 (40 + xx * 80, 0 if xx == 0 or xx == 9 else 10 + yy * 60),
                 (40 + xx * 80, 600 if xx == 0 or xx == 9 else 50 + yy * 60), 5)
-
-
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.speed = 1
 
 game = True
 while game:
