@@ -42,7 +42,6 @@ class Player(pg.sprite.Sprite):
         self.position += self.velocity
         self.rect.center = self.position
 
-
 class Car(pg.sprite.Sprite):
     def __init__(self, x, y, img):
         pg.sprite.Sprite.__init__(self)
