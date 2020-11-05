@@ -1,5 +1,6 @@
 #"Ралли"
 import pygame as pg
+import random
 import os
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -26,28 +27,16 @@ class Player(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load('Image/car4.png')
+        self.rect = self.image.get_rect()
 
 class Car(pg.sprite.Sprite):
-    def __init__(self, x, y, w, h , s, img):
+    def __init__(self, x, y, img):
         pg.sprite.Sprite.__init__(self)
-        self.image = img
-        self.image = pg.transform.flip(self.image, False, True)
-        self.x, self.y = x, y
-        self.w, self.h = w,h
-        self.speed = s
-        self.rect = self.image.get_rect(center=(self.x, self.y))
-
-
-
-play = Player()
-play_image = play.image
-play_w, play_h = play.image.get_width(), play.image.get_height()
-play.x, play.y = (WIDTH - play_w) // 2, (HEIGHT - play_h) // 2
-
-
-car1 = Car(WIDTH // 2 + 80, HEIGHT // 2, 
-            car1_image.get_width(), car1_image.get_height(), 1, car1_image)
-
+        
+        self.image = pg.transform.flip(img, False, True)
+        #self.w, self.h = self.image.get_width(), self.image.get_height()
+        self.speed = random.randint(2, 3)
+        self.rect = self.image.get_rect(center=(x, y))
 
 class Road(pg.sprite.Sprite):
     def __init__(self, x, y):
@@ -65,6 +54,14 @@ class Road(pg.sprite.Sprite):
                 (40 + xx * 80, 600 if xx == 0 or xx == 9 else 50 + yy * 60), 5)
         self.rect = self.image.get_rect(topleft=(x, y))
         self.speed = 1
+
+
+play = Player()
+play_image = play.image
+play_w, play_h = play.image.get_width(), play.image.get_height()
+play.x, play.y = (WIDTH - play_w) // 2, (HEIGHT - play_h) // 2
+
+car1 = Car(WIDTH // 2 + 80, HEIGHT // 2, car1_image)
 
 game = True
 while game:
