@@ -43,17 +43,23 @@ class Road(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
 
         self.image = pg.Surface(screen.get_size())
-        self.image.sill(GRAY)
+        self.image.fill(GRAY)
         pg.draw.line(self.image, GREEN, (20,0), (20, 600), 40)
         pg.draw.line(self.image, GREEN, (780, 0), (780, 600), 40)
         for xx in range(10):
-        for yy in range(10):
-            pg.draw.line(
+            for yy in range(10):
+                pg.draw.line(
                 self.image, WHITE,
                 (40 + xx * 80, 0 if xx == 0 or xx == 9 else 10 + yy * 60),
                 (40 + xx * 80, 600 if xx == 0 or xx == 9 else 50 + yy * 60), 5)
         self.rect = self.image.get_rect(topleft=(x, y))
         self.speed = 1
+        
+    def update(self):
+        self.rect.y += self.speed
+        if self.rect.top >= HEIGHT:
+            self.rect.bottom = 0
+
 
 
 all_sprite = pg.sprite.Group()
@@ -69,8 +75,8 @@ while game:
         if e.type == pg.QUIT:
             game = False
 
-    all.sprite.update()
-    all.sprite.draw(screen)
+    all_sprite.update()
+    all_sprite.draw(screen)
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
