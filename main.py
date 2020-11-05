@@ -27,6 +27,10 @@ class Player(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load('Image/car4.png')
+        self.orig_image = self.image
+        self.angle = 0
+        self.speed = 2
+        self.acceleration = 0.02
         self.x, self.y = WIDTH // 2, HEIGHT // 2
         self.rect = self.image.get_rect()
         self.position = pg.math.Vector2(self.x, self.y)
