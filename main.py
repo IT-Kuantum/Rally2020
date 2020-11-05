@@ -21,7 +21,7 @@ WHITE = (200, 200, 200)
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
 #bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
-car1_image = pg.image.load('Image/car1.png')
+cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
@@ -80,8 +80,12 @@ all_sprite = pg.sprite.Group()
 for r in range(2):
     all_sprite.add(Road(0, 0 if r == 0 else -HEIGHT))
 player = Player()
-car1 = Car(WIDTH // 2 + 80, HEIGHT // 2, car1_image)
-all_sprite.add(car1, player)
+n = 0
+while n <6:
+    x = random.randrange(80, WIDTH, 80)
+    all_sprite.add(Car(x, -cars[0].get_height, car1_image))
+    n += 1
+all_sprite.add(player)
 
 game = True
 while game:
