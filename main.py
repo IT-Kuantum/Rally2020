@@ -83,7 +83,7 @@ player = Player()
 n = 0
 while n <6:
     x = random.randrange(80, WIDTH, 80)
-    all_sprite.add(Car(x, -cars[0].get_height, car1_image))
+    all_sprite.add(Car(x, -cars[0].get_height(), random.choice(cars)))
     n += 1
 all_sprite.add(player)
 
