@@ -55,11 +55,14 @@ class Road(pg.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x, y))
         self.speed = 1
 
-road = Road(0, 0)
+
+
+for r in range(2):
+    all_sprite.add(Road(0, 0 if r == 0 else -HEIGHT))
 player = Player()
 car1 = Car(WIDTH // 2 + 80, HEIGHT // 2, car1_image)
 all_sprite = pg.sprite.Group()
-all_sprite.add(player)
+all_sprite.add(car1, player)
 
 game = True
 while game:
