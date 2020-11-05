@@ -36,6 +36,12 @@ class Player(pg.sprite.Sprite):
         self.position = pg.math.Vector2(self.x, self.y)
         self.velocity = pg.math.Vector2()
 
+    def update(self):
+        self.image = pg.transform.rotate(self.orig_image, self.angle)
+        self.rect = self.image.get_rect(center=self.rect.center)
+        self.position += self.velocity
+        self.rect.center = self.position
+
 
 class Car(pg.sprite.Sprite):
     def __init__(self, x, y, img):
