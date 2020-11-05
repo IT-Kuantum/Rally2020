@@ -80,11 +80,16 @@ all_sprite = pg.sprite.Group()
 for r in range(2):
     all_sprite.add(Road(0, 0 if r == 0 else -HEIGHT))
 player = Player()
+list_x = []
 n = 0
-while n <6:
+while n < 6:
     x = random.randrange(80, WIDTH, 80)
-    all_sprite.add(Car(x, -cars[0].get_height(), random.choice(cars)))
-    n += 1
+    if x in list_x:
+        continue
+    else:
+        list_x.append(x)
+        all_sprite.add(Car(x, -cars[0].get_height(), random.choice(cars)))
+        n += 1
 all_sprite.add(player)
 
 game = True
