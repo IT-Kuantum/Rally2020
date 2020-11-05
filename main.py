@@ -55,27 +55,17 @@ class Road(pg.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x, y))
         self.speed = 1
 
-
-play = Player()
-play_image = play.image
-play_w, play_h = play.image.get_width(), play.image.get_height()
-play.x, play.y = (WIDTH - play_w) // 2, (HEIGHT - play_h) // 2
-
+road = Road(0, 0)
+player = Player()
 car1 = Car(WIDTH // 2 + 80, HEIGHT // 2, car1_image)
+all_sprite = pg.sprite.Group()
+all_sprite.add(player)
 
 game = True
 while game:
     for e in pg.event.get():
         if e.type == pg.QUIT:
             game = False
-
-    
-    bg_image_rect.y += 1
-    if bg_image_rect.y > HEIGHT:
-        bg_image_rect.y = 0
-    bg_image_2_rect.y += 1
-    if bg_image_2_rect.y > 0:
-        bg_image_2_rect.y = -HEIGHT
 
     screen.fill(GRAY)
     #bg()
