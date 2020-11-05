@@ -6,8 +6,7 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 SIZE = WIDTH, HEIGHT = 800, 600
 GRAY = (128, 128, 128)
-GREEN = (0, 128, 0)
-WHITE = (200, 200, 200)
+
 
 pg.init()
 pg.display.set_caption('Rally')
@@ -15,6 +14,8 @@ screen = pg.display.set_mode(SIZE)
 
 FPS = 120
 clock = pg.time.Clock()
+GREEN = (0, 128, 0)
+WHITE = (200, 200, 200)
 
 bg_image = pg.image.load('Image/road.jpg')
 bg_image_rect = bg_image.get_rect(topleft = (0, 0))
@@ -70,7 +71,6 @@ while game:
     bg_image_rect.y += 1
     if bg_image_rect.y > HEIGHT:
         bg_image_rect.y = 0
-    
     bg_image_2_rect.y += 1
     if bg_image_2_rect.y > 0:
         bg_image_2_rect.y = -HEIGHT
