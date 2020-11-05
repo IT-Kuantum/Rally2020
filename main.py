@@ -17,9 +17,9 @@ clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
 
-bg_image = pg.image.load('Image/road.jpg')
-bg_image_rect = bg_image.get_rect(topleft = (0, 0))
-bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
+#bg_image = pg.image.load('Image/road.jpg')
+#bg_image_rect = bg_image.get_rect(topleft = (0, 0))
+#bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
 car1_image = pg.image.load('Image/car1.png')
 
 class Player(pg.sprite.Sprite):
@@ -49,13 +49,18 @@ car1 = Car(WIDTH // 2 + 80, HEIGHT // 2,
             car1_image.get_width(), car1_image.get_height(), 1, car1_image)
 
 
-def bg():
-    pg.draw.line(screen, GREEN, (20,0), (20, 600), 40)
-    pg.draw.line(screen, GREEN, (780, 0), (780, 600), 40)
-    for xx in range(10):
+class Road(pg.sprite.Sprite):
+    def __init__(self, x, y):
+        pg.sprite.Sprite.__init__(self)
+
+        self.image = pg.Surface(screen.get_size())
+        self.image.sill(GRAY)
+        pg.draw.line(self.image, GREEN, (20,0), (20, 600), 40)
+        pg.draw.line(self.image, GREEN, (780, 0), (780, 600), 40)
+        for xx in range(10):
         for yy in range(10):
             pg.draw.line(
-                screen, WHITE,
+                self.image, WHITE,
                 (40 + xx * 80, 0 if xx == 0 or xx == 9 else 10 + yy * 60),
                 (40 + xx * 80, 600 if xx == 0 or xx == 9 else 50 + yy * 60), 5)
 
