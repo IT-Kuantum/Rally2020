@@ -42,6 +42,13 @@ class Player(pg.sprite.Sprite):
         self.position += self.velocity
         self.rect.center = self.position
 
+        keys = pg.key.get_pressed()
+        if keys[pg.K_RIGHT]:
+            self.velocity.x = self.speed
+            self.angle -= 1
+                
+
+
 class Car(pg.sprite.Sprite):
     def __init__(self, x, y, img):
         pg.sprite.Sprite.__init__(self)
