@@ -55,7 +55,10 @@ class Player(pg.sprite.Sprite):
                 self.angle = 25
         else:
             self.position = 0
-            
+            if self.angle < 0:
+                self.angle += 1
+            elif self.angle > 0:
+                self.angle -= 1
         
 
 
