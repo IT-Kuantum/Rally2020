@@ -63,6 +63,11 @@ class Player(pg.sprite.Sprite):
             self.velocity.y -= self.acceleration
             if self.velocity.y < -self.speed:
                 self.velocity = self.speed
+        elif keys[pg.K_DOWN]:
+            self.velocity.y += self.acceleration
+            if self.velocity.y > self.speed:
+                self.velocity = self.speed
+        
         
 
 
