@@ -153,9 +153,9 @@ while game:
             game = False
 
     if pg.sprite.spritecollideany(player, cars_group):
-        if block:
-            player.position[0] += 50 * random.randrange(-1, 2, 1)
-            player.angle = 50 * random.randrange(-1, 2, 1)
+        if not block:
+            player.position[0] += 50 * random.randrange(-1, 2, 2)
+            player.angle = 50 * random.randrange(-1, 2, 2)
             block = True
     else:
         block = False
