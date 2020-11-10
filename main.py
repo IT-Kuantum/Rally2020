@@ -48,6 +48,15 @@ class Player(pg.sprite.Sprite):
             self.angle -= 1
             if self.angle < -25:
                 self.angle = -25
+        elif keys[pg.K_LEFT]:
+            self.velocity.x = -self.speed
+            self.angle += 1
+            if self.angle > 25:
+                self.angle = 25
+        else:
+            self.position = 0
+            
+        
 
 
 class Car(pg.sprite.Sprite):
