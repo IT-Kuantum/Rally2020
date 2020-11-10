@@ -17,6 +17,7 @@ FPS = 120
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
+block = False
 
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
@@ -43,12 +44,12 @@ class Player(pg.sprite.Sprite):
         self.rect.center = self.position
 
         keys = pg.key.get_pressed()
-        if keys[pg.K_RIGHT]:
+        if keys[pg.K_d]:
             self.velocity.x = self.speed
             self.angle -= 1
             if self.angle < -25:
                 self.angle = -25
-        elif keys[pg.K_LEFT]:
+        elif keys[pg.K_a]:
             self.velocity.x = -self.speed
             self.angle += 1
             if self.angle > 25:
@@ -59,12 +60,12 @@ class Player(pg.sprite.Sprite):
                 self.angle += 1
             elif self.angle > 0:
                 self.angle -= 1
-        if keys[pg.K_UP]:
+        if keys[pg.K_w]:
             self.velocity.y -= self.acceleration
             if self.velocity.y < -self.speed:
                 self.velocity.y = -self.speed
 
-        elif keys[pg.K_DOWN]:
+        elif keys[pg.K_s]:
             self.velocity.y += self.acceleration
             if self.velocity.y > self.speed:
                 self.velocity.y = self.speed
@@ -77,7 +78,7 @@ class Player(pg.sprite.Sprite):
                 self.velocity.y -= self.acceleration
                 if self.velocity.y < 0:
                     self.velocity.y = 0
-
+        
 
 class Car(pg.sprite.Sprite):
     def __init__(self, x, y, img):
@@ -102,7 +103,6 @@ class Car(pg.sprite.Sprite):
                     list_x.append(self.rect.centerx)
                     self.speed = random.randint(2, 3)
                     break
-
 
 
 class Road(pg.sprite.Sprite):
@@ -130,6 +130,7 @@ class Road(pg.sprite.Sprite):
 
 
 all_sprite = pg.sprite.Group()
+cars_group = pg.sprite.Group()
 for r in range(2):
     all_sprite.add(Road(0, 0 if r == 0 else -HEIGHT))
 player = Player()
@@ -141,15 +142,20 @@ while n < 6:
         continue
     else:
         list_x.append(x)
-        all_sprite.add(Car(x, -cars[0].get_height(), random.choice(cars)))
+        cars_group.add(Car(x, -cars[0].get_height(), random.choice(cars)))
         n += 1
-all_sprite.add(player)
+all_sprite.add(cars_group, player)
 
 game = True
 while game:
     for e in pg.event.get():
         if e.type == pg.QUIT:
             game = False
+
+    if pg.sprite.spritecollideany(player, cars_group):
+        if block:
+            player.position[0] += 50 * random.randrange(-1, 2, 1)
+
 
     all_sprite.update()
     all_sprite.draw(screen)
