@@ -54,11 +54,15 @@ class Player(pg.sprite.Sprite):
             if self.angle > 25:
                 self.angle = 25
         else:
-            self.position = 0
+            self.velocity.x = 0
             if self.angle < 0:
                 self.angle += 1
             elif self.angle > 0:
                 self.angle -= 1
+        if keys[pg.K_UP]:
+            self.velocity.y -= self.acceleration
+            if self.velocity.y < -self.speed:
+                self.velocity = self.speed
         
 
 
