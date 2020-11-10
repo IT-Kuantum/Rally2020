@@ -51,6 +51,13 @@ class Car(pg.sprite.Sprite):
         self.speed = random.randint(2, 3)
         self.rect = self.image.get_rect(center=(x, y))
 
+    def update(self):
+        self.rect.y += self.speed
+        if self.rect.top >= HEIGHT:
+            self.rect.bottom = 0
+
+
+
 class Road(pg.sprite.Sprite):
     def __init__(self, x, y):
         pg.sprite.Sprite.__init__(self)
