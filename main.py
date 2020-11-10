@@ -62,19 +62,21 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_UP]:
             self.velocity.y -= self.acceleration
             if self.velocity.y < -self.speed:
-                self.velocity = -self.speed
+                self.velocity.y = -self.speed
 
         elif keys[pg.K_DOWN]:
             self.velocity.y += self.acceleration
             if self.velocity.y > self.speed:
-                self.velocity = self.speed
+                self.velocity.y = self.speed
         else:
             if self.velocity.y < 0:
                 self.velocity.y += self.acceleration
                 if self.velocity.y > 0:
                     self.velocity.y = 0
-        
-        
+            elif self.velocity.y > 0:
+                self.velocity.y -= self.acceleration
+                if self.velocity.y < 0:
+                    self.velocity.y = 0
 
 
 class Car(pg.sprite.Sprite):
