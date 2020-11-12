@@ -6,7 +6,7 @@ import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 SIZE = WIDTH, HEIGHT = 800, 600
-GRAY = (128, 128, 128)
+
 
 
 pg.init()
@@ -17,6 +17,7 @@ FPS = 120
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
+GRAY = (128, 128, 128)
 block = False
 car_accident = 0
 
@@ -150,11 +151,35 @@ while n < 6:
         n += 1
 all_sprite.add(cars_group, player)
 
+def screen1():
+    sc = pg.Surface(screen.get_size())
+    gg = pg.image.load('Image/road.jpg')
+    carplayer = pg.image.load('Image/car4.png')
+    car1 = pg.image.load('Image/car1.png')
+    sc.fill(pg.Color('navy'))
+    pg.draw.circle(gg, GREEN, (400, 300), 185)
+    pg.draw.line(gg, GREEN, (0, 0), (0, 600), 80)
+    pg.draw.line(gg, GREEN, (800, 0), (800, 600), 80)
+    pg.draw.line(gg, GREEN, (0, 0), (800, 0), 80)
+    pg.draw.line(gg, GREEN, (0, 600), (800, 600), 80)
+    start_button = pg.image.load('Image/start_button.png')
+    stop_button = pg.image.load('Image/stop_button.png')
+    screen.blit(sc, (0, 0))
+    screen.blit(gg, (0, 0))
+    screen.blit(carplayer, (55, 250))
+    screen.blit(car1, (700, 250))
+    screen.blit(start_button, (245, 193))
+    screen.blit(stop_button, (245, 312))
+
 game = True
 while game:
     for e in pg.event.get():
         if e.type == pg.QUIT:
             game = False
+        elif e.type == pg.MOUSEBUTTONDOWN:
+            if e.button == 1:
+               #if название кнопки.collidepoint:
+                pass
 
     if pg.sprite.spritecollideany(player, cars_group):
         if not block:
@@ -170,6 +195,7 @@ while game:
     #all_sprite.update()
     #all_sprite.draw(screen)
     #screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
+    screen1()
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
