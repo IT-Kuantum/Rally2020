@@ -18,12 +18,15 @@ clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
 block = False
+car_accident = 0
 
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
 #bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
 cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
 sound_car_accident = pg.mixer.Sound('sound/udar.wav')
+font = pg.font.Font(None, 32)
+
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
@@ -157,6 +160,8 @@ while game:
         if not block:
             player.position[0] += 50 * random.randrange(-1, 2, 2)
             player.angle = 50 * random.randrange(-1, 2, 2)
+            sound_car_accident.play()
+            car_accident += 1
             block = True
     else:
         block = False
@@ -164,6 +169,7 @@ while game:
 
     all_sprite.update()
     all_sprite.draw(screen)
+    screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
