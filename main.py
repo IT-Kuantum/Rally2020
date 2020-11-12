@@ -13,7 +13,7 @@ pg.init()
 pg.display.set_caption('Rally')
 screen = pg.display.set_mode(SIZE)
 
-FPS = 120
+FPS = 344444
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
