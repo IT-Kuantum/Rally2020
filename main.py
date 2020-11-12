@@ -13,7 +13,7 @@ pg.init()
 pg.display.set_caption('Rally')
 screen = pg.display.set_mode(SIZE)
 
-FPS = 344444
+FPS = 120
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
@@ -23,6 +23,7 @@ block = False
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
 #bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
 cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
+sound_car_accident = pg.mixer.Sound('sound/udar.wav')
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
