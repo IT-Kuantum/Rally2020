@@ -167,9 +167,9 @@ while game:
         block = False
 
 
-    all_sprite.update()
-    all_sprite.draw(screen)
-    screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
+    #all_sprite.update()
+    #all_sprite.draw(screen)
+    #screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
