@@ -165,7 +165,7 @@ def screen1():
     sc.fill(pg.Color('navy'))
     pg.draw.line(gg, GREEN, (0, 0), (0, 600), 80)
     pg.draw.line(gg, GREEN, (800, 0), (800, 600), 80)
-    pg.draw.line(gg, RED, (400, 50), (400, 100), 530)
+    pg.draw.line(gg, RED, (400, 50), (400, 125), 530)
     screen.blit(sc, (0, 0))
     screen.blit(gg, (0, 0))
     screen.blit(carplayer, (55, 250))
