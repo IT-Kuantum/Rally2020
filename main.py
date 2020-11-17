@@ -29,9 +29,20 @@ scr1 = True
 cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
 sound_car_accident = pg.mixer.Sound('sound/udar.wav')
 font = pg.font.Font(None, 32)
+
+gg = pg.image.load('Image/road.jpg')
+
+font1 = pg.font.SysFont('Arial', 50, True, False)
+carplayer = pg.image.load('Image/car4.png')
+
+car1 = pg.image.load('Image/car1.png')
+car1 = pg.transform.flip(car1, False, True)
+
 start_button = pg.image.load('Image/start_button.png')
-start_button_rect = start_button.get_rect(center = (WIDTH // 2, HEIGHT // 2 - 200))
+start_button_rect = start_button.get_rect(center = (200, 200))
+
 stop_button = pg.image.load('Image/stop_button.png')
+stop_button_rect = stop_button.get_rect(center = (300, 350))
 
 
 class Player(pg.sprite.Sprite):
@@ -158,20 +169,17 @@ all_sprite.add(cars_group, player)
 
 def screen1():
     sc = pg.Surface(screen.get_size())
-    gg = pg.image.load('Image/road.jpg')
-    carplayer = pg.image.load('Image/car4.png')
-    car1 = pg.image.load('Image/car1.png')
-    car1 = pg.transform.flip(car1, False, True)
     sc.fill(pg.Color('navy'))
-    pg.draw.line(gg, GREEN, (0, 0), (0, 600), 80)
-    pg.draw.line(gg, GREEN, (800, 0), (800, 600), 80)
-    pg.draw.line(gg, RED, (400, 50), (400, 125), 530)
+
+    pg.draw.line(gg, GREEN, (400, 50), (400, 125), 530)
+    sc.blit(gg, (0, 0))
+    sc.blit(font1.render('SuperRally 2020', True, WHITE), (210, 58))
+    sc.blit(carplayer, (55, 250))
+    sc.blit(car1, (700, 250))
+    sc.blit(start_button, (200, 193))
+    sc.blit(stop_button, (300, 312))
     screen.blit(sc, (0, 0))
-    screen.blit(gg, (0, 0))
-    screen.blit(carplayer, (55, 250))
-    screen.blit(car1, (700, 250))
-    screen.blit(start_button, (200, 193))
-    screen.blit(stop_button, (300, 312))
+
 
 
 game = True
@@ -183,6 +191,9 @@ while game:
             if e.button == 1:
                 if start_button_rect.collidepoint(e.pos):
                     scr1 = False
+                if stop_button_rect.collidepoint(e.pos):
+                    game = False
+                
 
     if pg.sprite.spritecollideany(player, cars_group):
         if not block:
@@ -193,6 +204,7 @@ while game:
             block = True
     else:
         block = False
+
 
     if scr1:
         screen1()
