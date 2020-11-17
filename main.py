@@ -18,8 +18,10 @@ clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
 GRAY = (128, 128, 128)
+RED = (200, 0, 0)
 block = False
 car_accident = 0
+scr1 = True
 
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
@@ -27,6 +29,9 @@ car_accident = 0
 cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
 sound_car_accident = pg.mixer.Sound('sound/udar.wav')
 font = pg.font.Font(None, 32)
+start_button = pg.image.load('Image/start_button.png')
+start_button_rect = start_button.get_rect(center = (WIDTH // 2, HEIGHT // 2 - 200))
+stop_button = pg.image.load('Image/stop_button.png')
 
 
 class Player(pg.sprite.Sprite):
@@ -156,20 +161,18 @@ def screen1():
     gg = pg.image.load('Image/road.jpg')
     carplayer = pg.image.load('Image/car4.png')
     car1 = pg.image.load('Image/car1.png')
+    car1 = pg.transform.flip(car1, False, True)
     sc.fill(pg.Color('navy'))
-    pg.draw.circle(gg, GREEN, (400, 300), 185)
     pg.draw.line(gg, GREEN, (0, 0), (0, 600), 80)
     pg.draw.line(gg, GREEN, (800, 0), (800, 600), 80)
-    pg.draw.line(gg, GREEN, (0, 0), (800, 0), 80)
-    pg.draw.line(gg, GREEN, (0, 600), (800, 600), 80)
-    start_button = pg.image.load('Image/start_button.png')
-    stop_button = pg.image.load('Image/stop_button.png')
+    pg.draw.line(gg, RED, (400, 50), (400, 100), 530)
     screen.blit(sc, (0, 0))
     screen.blit(gg, (0, 0))
     screen.blit(carplayer, (55, 250))
     screen.blit(car1, (700, 250))
-    screen.blit(start_button, (245, 193))
-    screen.blit(stop_button, (245, 312))
+    screen.blit(start_button, (200, 193))
+    screen.blit(stop_button, (300, 312))
+
 
 game = True
 while game:
@@ -178,8 +181,8 @@ while game:
             game = False
         elif e.type == pg.MOUSEBUTTONDOWN:
             if e.button == 1:
-               #if название кнопки.collidepoint:
-                pass
+                if start_button_rect.collidepoint(e.pos):
+                    scr1 = False
 
     if pg.sprite.spritecollideany(player, cars_group):
         if not block:
@@ -191,10 +194,13 @@ while game:
     else:
         block = False
 
-
-    #all_sprite.update()
-    #all_sprite.draw(screen)
-    #screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
+    if scr1:
+        screen1()
+    else:
+        all_sprite.update()
+        all_sprite.draw(screen)
+        screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
+    
     screen1()
     pg.display.update()
     clock.tick(FPS)
