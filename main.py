@@ -224,6 +224,7 @@ while game:
             rgb[:2] = 250, 0
         elif level <= 25:
             rgb[0] = 250
+            
         
         all_sprite.update()
         all_sprite.draw(screen)
