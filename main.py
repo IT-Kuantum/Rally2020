@@ -218,10 +218,13 @@ while game:
         screen1()
     else:
         level -= 0.05
-        if level < 20:
+        if level < 0:
+            scr1 = True 
+        elif level <= 10:
+            rgb[:2] = 250, 0
+        elif level <= 25:
             rgb[0] = 250
-        if level < 10:
-            rgb[1] = 0
+        
         all_sprite.update()
         all_sprite.draw(screen)
         pg.draw.rect(
