@@ -7,12 +7,6 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 SIZE = WIDTH, HEIGHT = 800, 600
 
-
-
-pg.init()
-pg.display.set_caption('Rally')
-screen = pg.display.set_mode(SIZE)
-
 FPS = 120
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
@@ -22,6 +16,10 @@ RED = (200, 0, 0)
 block = False
 car_accident = 0
 scr1 = True
+
+pg.init()
+pg.display.set_caption('Rally')
+screen = pg.display.set_mode(SIZE)
 
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
@@ -170,7 +168,6 @@ all_sprite.add(cars_group, player)
 def screen1():
     sc = pg.Surface(screen.get_size())
     sc.fill(pg.Color('navy'))
-
     pg.draw.line(gg, GREEN, (400, 50), (400, 125), 530)
     sc.blit(gg, (0, 0))
     sc.blit(font1.render('SuperRally 2020', True, WHITE), (210, 58))
@@ -197,7 +194,7 @@ while game:
 
     if pg.sprite.spritecollideany(player, cars_group):
         if not block:
-            player.position[0] += 50 * random.randrange(-1, 2, 2)
+            player.position.x += 50 * random.randrange(-1, 2, 2)
             player.angle = 50 * random.randrange(-1, 2, 2)
             sound_car_accident.play()
             car_accident += 1
@@ -213,7 +210,6 @@ while game:
         all_sprite.draw(screen)
         screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
     
-    screen1()
     pg.display.update()
     clock.tick(FPS)
     pg.display.set_caption(f'Rally   FPS: {int(clock.get_fps())}')
