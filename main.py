@@ -7,15 +7,17 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 SIZE = WIDTH, HEIGHT = 800, 600
 
-FPS = 120
+FPS = 200
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
 GRAY = (128, 128, 128)
+YELLOW = (250, 250, 0)
 block = False
 car_accident = 0
 scr1 = True
 rgb = [0, 250, 0]
+level = 40
 
 pg.init()
 pg.display.set_caption('Rally')
@@ -215,9 +217,16 @@ while game:
     if scr1:
         screen1()
     else:
+        level -= 0.05
+        if level < 20:
+            rgb[0] = 250
+        if level < 10:
+            rgb[1] = 0
         all_sprite.update()
         all_sprite.draw(screen)
-        pg.draw.rect(screen, )
+        pg.draw.rect(
+            screen, rgb, 
+            (fuel.rect.left + 10, fuel.rect.bottom - level - 8, 20, level))
         screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
     
     pg.display.update()
