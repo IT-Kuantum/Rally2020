@@ -12,10 +12,10 @@ clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
 GRAY = (128, 128, 128)
-RED = (200, 0, 0)
 block = False
 car_accident = 0
 scr1 = True
+rgb = [0, 250, 0]
 
 pg.init()
 pg.display.set_caption('Rally')
@@ -24,6 +24,8 @@ screen = pg.display.set_mode(SIZE)
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
 #bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
+fuel_image = pg.image.load('Image/fuel.png')
+
 cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
 sound_car_accident = pg.mixer.Sound('sound/udar.wav')
 font = pg.font.Font(None, 32)
@@ -37,10 +39,10 @@ car1 = pg.image.load('Image/car1.png')
 car1 = pg.transform.flip(car1, False, True)
 
 start_button = pg.image.load('Image/start_button.png')
-start_button_rect = start_button.get_rect(center = (200, 200))
+start_button_rect = start_button.get_rect(center = (WIDTH // 2, 250))
 
 stop_button = pg.image.load('Image/stop_button.png')
-stop_button_rect = stop_button.get_rect(center = (300, 350))
+stop_button_rect = stop_button.get_rect(center = (WIDTH // 2, 350))
 
 
 class Player(pg.sprite.Sprite):
@@ -103,9 +105,13 @@ class Car(pg.sprite.Sprite):
     def __init__(self, x, y, img):
         pg.sprite.Sprite.__init__(self)
         
-        self.image = pg.transform.flip(img, False, True)
-        #self.w, self.h = self.image.get_width(), self.image.get_height()
-        self.speed = random.randint(2, 3)
+        if img == fuel_image:
+            self.image = img
+            self.speed = 0
+        else:
+            self.image = pg.transform.flip(img, False, True)
+            #self.w, self.h = self.image.get_width(), self.image.get_height()
+            self.speed = random.randint(2, 3)
         self.rect = self.image.get_rect(center=(x, y))
 
     def update(self):
@@ -150,6 +156,7 @@ class Road(pg.sprite.Sprite):
 
 all_sprite = pg.sprite.Group()
 cars_group = pg.sprite.Group()
+
 for r in range(2):
     all_sprite.add(Road(0, 0 if r == 0 else -HEIGHT))
 player = Player()
@@ -163,7 +170,9 @@ while n < 6:
         list_x.append(x)
         cars_group.add(Car(x, -cars[0].get_height(), random.choice(cars)))
         n += 1
-all_sprite.add(cars_group, player)
+
+fuel = Car(720, 40, fuel_image)
+all_sprite.add(cars_group, player, fuel)
 
 def screen1():
     sc = pg.Surface(screen.get_size())
@@ -173,8 +182,8 @@ def screen1():
     sc.blit(font1.render('SuperRally 2020', True, WHITE), (210, 58))
     sc.blit(carplayer, (55, 250))
     sc.blit(car1, (700, 250))
-    sc.blit(start_button, (200, 193))
-    sc.blit(stop_button, (300, 312))
+    sc.blit(start_button, start_button_rect)
+    sc.blit(stop_button, stop_button_rect)
     screen.blit(sc, (0, 0))
 
 
@@ -208,6 +217,7 @@ while game:
     else:
         all_sprite.update()
         all_sprite.draw(screen)
+        pg.draw.rect(screen, )
         screen.blit(font.render(f'{car_accident = }', 1, GREEN), (45, 10))
     
     pg.display.update()
