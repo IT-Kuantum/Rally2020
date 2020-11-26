@@ -114,7 +114,7 @@ class Car(pg.sprite.Sprite):
         elif img == canister_image:
             self.image = img
             self.speed = 1
-            
+
         else:
             self.image = pg.transform.flip(img, False, True)
             self.speed = random.randint(2, 3)
@@ -179,7 +179,7 @@ while n < 6:
         continue
     else:
         list_x.append(x)
-        cars_group.add(Car(x, -cars[0].get_height(), random.choice(cars)))
+        cars_group.add(Car(x, -cars[0].get_height(), cars[n] if n < 3 else random.choice(cars)))
         n += 1
 
 fuel = Car(720, 40, fuel_image)
