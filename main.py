@@ -114,6 +114,7 @@ class Car(pg.sprite.Sprite):
         elif img == canister_image:
             self.image = img
             self.speed = 1
+            
         else:
             self.image = pg.transform.flip(img, False, True)
             self.speed = random.randint(2, 3)
