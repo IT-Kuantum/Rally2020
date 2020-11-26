@@ -111,6 +111,9 @@ class Car(pg.sprite.Sprite):
         if img == fuel_image:
             self.image = img
             self.speed = 0
+        elif img == canister_image:
+            self.image = img
+            self.speed = 1
         else:
             self.image = pg.transform.flip(img, False, True)
             #self.w, self.h = self.image.get_width(), self.image.get_height()
