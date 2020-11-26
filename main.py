@@ -40,9 +40,12 @@ start_button = pg.image.load('Image/start_button.png')
 start_button_rect = start_button.get_rect(center = (WIDTH // 2, 250))
 stop_button = pg.image.load('Image/stop_button.png')
 stop_button_rect = stop_button.get_rect(center = (WIDTH // 2, 350))
-
 fuel_image = pg.image.load('Image/fuel.png')
 canister_image = pg.image.load('Image/canister.png')
+
+user_event = pg.USEREVENT
+pg.time.set_timer(user_event, random.randrange(7000, 27001, 5000))
+
 
 
 class Player(pg.sprite.Sprite):
@@ -155,6 +158,7 @@ class Road(pg.sprite.Sprite):
 
 
 all_sprite = pg.sprite.Group()
+canister_group = pg.sprite.Group()
 cars_group = pg.sprite.Group()
 
 for r in range(2):
@@ -172,7 +176,9 @@ while n < 6:
         n += 1
 
 fuel = Car(720, 40, fuel_image)
-all_sprite.add(cars_group, player, fuel)
+canister = Car(x, -canister_image.get_height(), canister_image)
+canister_group.add(canister)
+all_sprite.add(cars_group, player, fuel, canister_group)
 
 def screen1():
     sc = pg.Surface(screen.get_size())
@@ -199,7 +205,8 @@ while game:
                     scr1 = False
                 if stop_button_rect.collidepoint(e.pos):
                     game = False
-                
+        elif e.type == user_event:
+            pass                
 
     if pg.sprite.spritecollideany(player, cars_group):
         if not block:
