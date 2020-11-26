@@ -41,7 +41,7 @@ start_button_rect = start_button.get_rect(center = (WIDTH // 2, 250))
 stop_button = pg.image.load('Image/stop_button.png')
 stop_button_rect = stop_button.get_rect(center = (WIDTH // 2, 350))
 fuel_image = pg.image.load('Image/fuel.png')
-#canister_image = pg.image.load('Image/canister.png')
+canister_image = pg.image.load('Image/canister.png')
 luzha_image = pg.image.load('Image/water.png')
 
 user_event = pg.USEREVENT
@@ -126,20 +126,21 @@ class Car(pg.sprite.Sprite):
         self.rect = self.image.get_rect(center=(x, y))
 
     def update(self):
-
-            self.rect.y += self.speed
+        self.rect.y += self.speed
+        if self.image == canister_image
             if self.rect.top >= HEIGHT:
-                self.rect.bottom = 0
+                #self.rect.bottom = 0
+                pass
         
-                list_x.remove(self.rect.centerx)
-                while True:
-                    self.rect.centerx = random.randrange(80, WIDTH, 80)
-                    if self.rect.centerx in list_x:
-                        continue
-                    else:
-                        list_x.append(self.rect.centerx)
-                        self.speed = random.randint(2, 3)
-                        break
+            list_x.remove(self.rect.centerx)
+            while True:
+                self.rect.centerx = random.randrange(80, WIDTH, 80)
+                if self.rect.centerx in list_x:
+                    continue
+                else:
+                    list_x.append(self.rect.centerx)
+                    self.speed = random.randint(2, 3)
+                    break
 
 
 class Road(pg.sprite.Sprite):
@@ -187,10 +188,10 @@ while n < 6:
 
 fuel = Car(720, 40, fuel_image)
 luzha = Car(x, -luzha_image.get_height(), luzha_image)
-#canister = Car(x, -canister_image.get_height(), canister_image)
-#canister_group.add(canister)
+canister = Car(x, -canister_image.get_height(), canister_image)
+canister_group.add(canister)
 luzha_group.add(luzha)
-all_sprite.add(cars_group, player, fuel, luzha_group)
+all_sprite.add(cars_group, player, fuel, luzha_group, cars_group)
 
 def screen1():
     sc = pg.Surface(screen.get_size())
