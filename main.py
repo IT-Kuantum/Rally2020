@@ -42,6 +42,7 @@ stop_button = pg.image.load('Image/stop_button.png')
 stop_button_rect = stop_button.get_rect(center = (WIDTH // 2, 350))
 fuel_image = pg.image.load('Image/fuel.png')
 #canister_image = pg.image.load('Image/canister.png')
+luzha_image = pg.image.load('Image/water.png')
 
 user_event = pg.USEREVENT
 pg.time.set_timer(user_event, random.randrange(7000, 27001, 5000))
@@ -111,6 +112,10 @@ class Car(pg.sprite.Sprite):
         if img == fuel_image:
             self.image = img
             self.speed = 0
+        elif img == luzha_image:
+            self.image = img
+            self.speed = 1
+            
         #elif img == canister_image:
             #self.image = img
             #self.speed = 1
@@ -163,6 +168,7 @@ class Road(pg.sprite.Sprite):
 
 all_sprite = pg.sprite.Group()
 canister_group = pg.sprite.Group()
+luzha_group = pg.sprite.Group()
 cars_group = pg.sprite.Group()
 
 for r in range(2):
@@ -180,9 +186,11 @@ while n < 6:
         n += 1
 
 fuel = Car(720, 40, fuel_image)
+luzha = Car(x, -luzha_image.get_height(), luzha_image)
 #canister = Car(x, -canister_image.get_height(), canister_image)
 #canister_group.add(canister)
-all_sprite.add(cars_group, player, fuel)
+luzha_group.add(luzha)
+all_sprite.add(cars_group, player, fuel, luzha_group)
 
 def screen1():
     sc = pg.Surface(screen.get_size())
