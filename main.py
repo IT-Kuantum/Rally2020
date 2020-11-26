@@ -116,24 +116,27 @@ class Car(pg.sprite.Sprite):
             self.speed = 1
         else:
             self.image = pg.transform.flip(img, False, True)
-            #self.w, self.h = self.image.get_width(), self.image.get_height()
             self.speed = random.randint(2, 3)
         self.rect = self.image.get_rect(center=(x, y))
 
     def update(self):
-        self.rect.y += self.speed
-        if self.rect.top >= HEIGHT:
-            self.rect.bottom = 0
+        if self.image == canister_image:
+            if self.rect.top >= HEIGHT:
+                self.image.kill()
+        else:
+            self.rect.y += self.speed
+            if self.rect.top >= HEIGHT:
+                self.rect.bottom = 0
         
-            list_x.remove(self.rect.centerx)
-            while True:
-                self.rect.centerx = random.randrange(80, WIDTH, 80)
-                if self.rect.centerx in list_x:
-                    continue
-                else:
-                    list_x.append(self.rect.centerx)
-                    self.speed = random.randint(2, 3)
-                    break
+                list_x.remove(self.rect.centerx)
+                while True:
+                    self.rect.centerx = random.randrange(80, WIDTH, 80)
+                    if self.rect.centerx in list_x:
+                        continue
+                    else:
+                        list_x.append(self.rect.centerx)
+                        self.speed = random.randint(2, 3)
+                        break
 
 
 class Road(pg.sprite.Sprite):
