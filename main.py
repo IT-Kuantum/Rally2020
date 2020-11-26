@@ -26,25 +26,23 @@ screen = pg.display.set_mode(SIZE)
 #bg_image = pg.image.load('Image/road.jpg')
 #bg_image_rect = bg_image.get_rect(topleft = (0, 0))
 #bg_image_2_rect = bg_image.get_rect(topleft = (0, -HEIGHT))
-fuel_image = pg.image.load('Image/fuel.png')
+
 
 cars = [pg.image.load('Image/car1.png'), pg.image.load('Image/car2.png'), pg.image.load('Image/car3.png')]
 sound_car_accident = pg.mixer.Sound('sound/udar.wav')
 font = pg.font.Font(None, 32)
-
 gg = pg.image.load('Image/road.jpg')
-
 font1 = pg.font.SysFont('Arial', 50, True, False)
 carplayer = pg.image.load('Image/car4.png')
-
 car1 = pg.image.load('Image/car1.png')
 car1 = pg.transform.flip(car1, False, True)
-
 start_button = pg.image.load('Image/start_button.png')
 start_button_rect = start_button.get_rect(center = (WIDTH // 2, 250))
-
 stop_button = pg.image.load('Image/stop_button.png')
 stop_button_rect = stop_button.get_rect(center = (WIDTH // 2, 350))
+
+fuel_image = pg.image.load('Image/fuel.png')
+canister_image = pg.image.load('Image/canister.png')
 
 
 class Player(pg.sprite.Sprite):
