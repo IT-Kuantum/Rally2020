@@ -7,7 +7,7 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 SIZE = WIDTH, HEIGHT = 800, 600
 
-FPS = 200
+FPS = 120
 clock = pg.time.Clock()
 GREEN = (0, 128, 0)
 WHITE = (200, 200, 200)
@@ -217,7 +217,7 @@ while game:
     if scr1:
         screen1()
     else:
-        level -= 0.05
+        level -= 0.01
         if level < 0:
             scr1 = True 
         elif level <= 10:
