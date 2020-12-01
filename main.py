@@ -115,7 +115,6 @@ class Car(pg.sprite.Sprite):
         elif img == luzha_image:
             self.image = img
             self.speed = 1
-            
         #elif img == canister_image:
             #self.image = img
             #self.speed = 1
@@ -127,7 +126,7 @@ class Car(pg.sprite.Sprite):
 
     def update(self):
         self.rect.y += self.speed
-        if self.image == canister_image
+        if self.image == canister_image:
             if self.rect.top >= HEIGHT:
                 #self.rect.bottom = 0
                 pass
